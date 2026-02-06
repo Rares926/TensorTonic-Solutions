@@ -11,13 +11,16 @@ def generate_anchors(feature_size, image_size, scales, aspect_ratios):
     g_H = image_size // stride
 
     all_anchors = []
+
     for i in range(g_H):
         for j in range(g_W):
+
             cx = (j+0.5) * stride
             cy = (i+0.5) * stride
-            anchors_for_cell = []
+
             for scale in scales:
                 for ar in aspect_ratios:
+    
                     b_W = float(scale * np.sqrt(ar))
                     b_H = float(scale / np.sqrt(ar))
                     anchor_box = [
