@@ -8,11 +8,10 @@ def promote_model(models):
     models = sorted(
         models,
         key=lambda x: (
-            x["accuracy"],
-            -x["latency"],
-            datetime.fromisoformat(x["timestamp"]).timestamp()
+            -x["accuracy"],
+            x["latency"],
+            -datetime.fromisoformat(x["timestamp"]).timestamp()
             ),
-        reverse=True
     )
 
     return models[0]["name"]
