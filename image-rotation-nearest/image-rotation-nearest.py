@@ -13,15 +13,18 @@ def rotate_image(image, angle_degrees):
     cy = (image.shape[0]-1)/2
 
     image_rotated = np.zeros_like(image)
-    for i in range(image.shape[1]):
-        for j in range(image.shape[0]):
+    for i_y in range(image.shape[0]):
+        for j_x in range(image.shape[1]):
             
-            dx = j - cx
-            dy = i - cy
+            dx = j_x - cx
+            dy = i_y - cy
 
             src_x = round(cx - dy * np.sin(angle_rad) + dx * np.cos(angle_rad))
             src_y = round(cy + dy * np.cos(angle_rad) + dx * np.sin(angle_rad))
 
-            image_rotated[i ,j] = image[src_y, src_x]
-
+            # out shape is already filled with zero if we have out of bound pixels 
+            # we simply do nothing
+            if 0 <= src_x < image.shape[1] and 0 <= src_y < image.shape[0]:
+                image_rotated[i_y, j_x] = image[src_y, src_x]
+                            
     return image_rotated.tolist()
