@@ -7,9 +7,9 @@ def alexnet_conv1(image: np.ndarray) -> np.ndarray:
     kernel_H, kernel_W = 11, 11
     stride = 4
     filters = 96
-    out_H, out_W = 55, 55
-
-    pad_H = ((out_H-1)*stride-img_H+kernel_H)/2
-    pad_W = ((out_W-1)*stride-img_W+kernel_W)/2
-
-    return np.ones((B, out_H, out_W, filters))
+    padding = 2
+    
+    out_H = (img_H + 2 * padding - kernel_H) // stride + 1
+    out_W = (img_W + 2 * padding - kernel_W) // stride + 1
+    
+    return np.zeros((B, out_H, out_W, filters))
